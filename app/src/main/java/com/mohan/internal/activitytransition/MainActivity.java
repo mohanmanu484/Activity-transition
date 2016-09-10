@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Fade;
-import android.transition.Transition;
 import android.view.View;
 import android.view.Window;
 
@@ -35,10 +33,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 // create the transition animation - the images in the layouts
                 // of both activities are defined with android:transitionName="robot"
-                ActivityOptionsCompat options = null;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                     Pair<View, String> pair1 = Pair.create(androidRobotView, androidRobotView.getTransitionName());
-                    options = ActivityOptionsCompat
+                    ActivityOptionsCompat options = ActivityOptionsCompat
                             .makeSceneTransitionAnimation(MainActivity.this, pair1);
                     startActivity(intent, options.toBundle());
                 }else {
@@ -53,12 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private void requestFeature() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-            Transition fade = new Fade();
-            fade.setDuration(2000);
-            fade.excludeTarget(android.R.id.statusBarBackground, true);
-            fade.excludeTarget(android.R.id.navigationBarBackground, true);
-            getWindow().setExitTransition(fade);
-            getWindow().setEnterTransition(fade);
+  /*          getWindow().setExitTransition(fade);
+            getWindow().setEnterTransition(fade);*/
         }
     }
 
